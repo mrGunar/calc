@@ -1,6 +1,5 @@
 from enum import Enum
-import json
-
+import settings
 
 class Composition(Enum):
     protein = 'protein'
@@ -9,10 +8,8 @@ class Composition(Enum):
 
 
 class Constant(Enum):
-    with open('config.json') as f:
-        ans = json.load(f)
-        PROTEIN = ans['protein_rates']
-        FAT = ans['fat_rates']
+    PROTEIN = settings.protein_rates
+    FAT = settings.fat_rates
 
 
 class Rate(Enum):
