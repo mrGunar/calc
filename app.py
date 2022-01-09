@@ -1,4 +1,4 @@
-from services import calculate_calories, pretty_print_for_human
+from services import calculate_calories, pretty_print_for_human, print_info
 import config
 
 
@@ -31,6 +31,16 @@ class App:
                     break
                 case 'calculation':
                     self.read_input_data()
+                case 'info':
+                    input_weight = int(input('Please input your weight: '))
+                    height = int(input('Input your height: '))
+                    while 1:
+                        sex = input('Input your sex( m/w): ')
+                        if sex in ('mw'):break
+                        print('Not correct input!')
+                    age = int(input('Input your age: '))
+                    print_info(weight=input_weight, sex=sex, height=height, age=age)    
+
                 case _:
                     print('Unknown command. Please check')
                     continue

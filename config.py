@@ -1,1 +1,1 @@
-menu = ['caclulation', 'write' , 'read', 'quit']
+menu = ['caclulation', 'write' , 'read','info', 'quit']
