@@ -10,7 +10,10 @@ def calculate_calories(total: int, weight: int) -> tuple:
 
     if p < 0 or f < 0 or c < 0:
         print('PLS checks settings beacause results not correct')
-    return (p, f, c)
+    try:    
+        return (p, f, c)
+    except ValueError as e:
+        print(f'Not corect input data. {e}')
 
 
 def pretty_print_for_human(total: tuple) -> None:
