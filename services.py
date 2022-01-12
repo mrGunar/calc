@@ -32,3 +32,12 @@ def print_info(weight, sex, height, age):
         print("Check inputs data")
     print(f'Согласно формуле Жерона (дневная активность не учтена): {result_calories}')
 
+def print_main_menu(menu: list) -> None:
+    l = len(" ".join(menu))
+    print("=" * (l + len(menu)))
+    print(*menu, sep='||')
+
+
+def print_all_product(array):
+    for row in array:
+        print(f"{row['id']}: {row['name']}:=> б - {row['proteins']} || ж - {row['fat']} || у - {row['carbs']} ")
