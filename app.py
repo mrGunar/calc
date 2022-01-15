@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-from services import calculate_calories, pretty_print_for_human, print_info_about_total_calories, print_main_menu, print_all_product
+from services import info, products, calculate, menu
 import config
 from FDataBase import DBProduct, DBUser
 
@@ -18,8 +18,8 @@ class App:
         except ValueError as e:
             print(f'Not correct data type. {e}')
             input_weight = input_cal = 0
-        ans = calculate_calories(input_cal, input_weight)
-        pretty_print_for_human(ans)
+        ans = calculate.calculate_calories(input_cal, input_weight)
+        info.pretty_print_for_human(ans)
 
     def info_command(self):
         """Command if user chooce `info`"""
@@ -30,7 +30,7 @@ class App:
             if sex in ('mw'):break
             print('Not correct input!')
         age = int(input('Input your age: '))
-        print_info_about_total_calories(weight=input_weight, sex=sex, height=height, age=age)
+        info.print_info_about_total_calories(weight=input_weight, sex=sex, height=height, age=age)
 
 
     def check_commands(self, command):
@@ -43,8 +43,8 @@ class App:
                 case 'info':
                     self.info_command()
                 case 'read':
-                    products = self.db_product.show_all_products()
-                    print_all_product(products)
+                    all_products = self.db_product.show_all_products()
+                    products.print_all_product(all_products)
                 case _:
                     print('Unknown command. Please check')
         return True
@@ -52,7 +52,7 @@ class App:
     def run(self):        
 
         while self.application:
-            print_main_menu(config.menu)
+            menu.print_main_menu(config.menu)
             command = input('Please choose command: ')
             if not self.check_commands(command):
                 self.application = False
