@@ -1,5 +1,6 @@
 import sqlite3
-from services import calculate_calories, pretty_print_for_human, print_info, print_main_menu, print_all_product
+import pandas as pd
+from services import calculate_calories, pretty_print_for_human, print_info_about_total_calories, print_main_menu, print_all_product
 import config
 from FDataBase import DBProduct, DBUser
 
@@ -20,6 +21,18 @@ class App:
         ans = calculate_calories(input_cal, input_weight)
         pretty_print_for_human(ans)
 
+    def info_command(self):
+        """Command if user chooce `info`"""
+        input_weight = int(input('Please input your weight: '))
+        height = int(input('Input your height: '))
+        while 1:
+            sex = input('Input your sex( m/w): ')
+            if sex in ('mw'):break
+            print('Not correct input!')
+        age = int(input('Input your age: '))
+        print_info_about_total_calories(weight=input_weight, sex=sex, height=height, age=age)
+
+
     def check_commands(self, command):
         match command:
                 case 'quit':
@@ -28,14 +41,7 @@ class App:
                 case 'calculation':
                     self.read_input_data_for_calculate()
                 case 'info':
-                    input_weight = int(input('Please input your weight: '))
-                    height = int(input('Input your height: '))
-                    while 1:
-                        sex = input('Input your sex( m/w): ')
-                        if sex in ('mw'):break
-                        print('Not correct input!')
-                    age = int(input('Input your age: '))
-                    print_info(weight=input_weight, sex=sex, height=height, age=age)
+                    self.info_command()
                 case 'read':
                     products = self.db_product.show_all_products()
                     print_all_product(products)
